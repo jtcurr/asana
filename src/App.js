@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Home from './components/Home';
+import ProjectByID from './components/ProjectByID';
 
 class App extends Component {
 
@@ -7,13 +9,8 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <header>
-            <h1>Welcome to Asana</h1>
-          </header>
-          <p>
-            Enter your the ID of the project you are looking for:
-          </p>
-          <input></input><button>Submit</button>
+          <Route exact={true} path='/' component={Home} />
+          <Route path='/projectByID:id' component={ProjectByID} />
         </div>
       </Router>
     );
