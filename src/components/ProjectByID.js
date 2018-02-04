@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import List from './List';
 import { fetchProjectAndTaskData } from './utils';
+import '../css/ProjectByID.css';
 
 class ProjectByID extends Component {
   constructor(props) {
@@ -36,14 +37,14 @@ class ProjectByID extends Component {
   render() {
     if (!this.state.isLoaded) {
       return (
-        <div>
+        <div className="loading-screen">
           <span>Loading...</span>
         </div>
       )
     }
     if (this.state.isError) {
       return(
-        <div>
+        <div className="error-screen">
           <p>I am sorry that token or projectID was incorrect</p>
         </div>
       )

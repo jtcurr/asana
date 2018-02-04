@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Redirect} from 'react-router-dom';
 import ProjectByID from './ProjectByID';
+import logo from '../assets/logo.jpg';
+import '../css/Home.css';
 
 class Home extends Component {
   constructor(props) {
@@ -21,27 +23,29 @@ class Home extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.setState({ redirect: true })
-    return (
-      <Route path='/new-path' component={ProjectByID}/>
-    )
   }
 
   render() {
     return (
       <div>
-        <header>
+        <div className='image-container'>
+          <img className='header-image' alt="AsanaLogo" src={logo} />
+        </div>
+        <header className='welcome-header'>
           <h1>Welcome to Asana</h1>
         </header>
-        <p>
+        <p className='welcome-header'>
           Enter your the ID of the project you are looking for:
         </p>
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.id} onChange={this.handleChange} />
+        <form className='welcome-header' onSubmit={this.handleSubmit}>
+          <input className="project-input" type="text" value={this.state.id} onChange={this.handleChange} />
           <input type="submit" value="Submit" />
         </form>
+        <div className='welcome-notes'>
         <span>546061061520110 for example</span>
+        </div>
         {this.state.redirect && (
-          <Redirect to={'/projectByID' + this.state.id} component={ProjectByID} params='test'/>
+          <Redirect from='/' to={'/projectByID' + this.state.id} component={ProjectByID} />
         )}
       </div>
     );
