@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import authKeys from '../authKeys.js';
 import List from './List';
+import { fetchProjectAndTaskData } from './utils';
 
 class ProjectByID extends Component {
   constructor(props) {
@@ -11,48 +11,13 @@ class ProjectByID extends Component {
       tasks: [],
       isError: false
     }
+    this.fetchProjectAndTaskData = fetchProjectAndTaskData.bind(this);
     this.queryPrefix = 'https://app.asana.com/api/1.0/projects/';
   }
 
   componentDidMount() {
-    this.fetchProjectAndTaskData(this.queryPrefix + this.props.match.params.id, 'project')
-    this.fetchProjectAndTaskData(this.queryPrefix + this.props.match.params.id + '/tasks', 'task')
-  }
-
-  fetchProjectAndTaskData(queryString, type) {
-    fetch(queryString, { 
-        method: 'get', 
-        headers: {
-          'Authorization': 'Bearer ' + authKeys.testKey, 
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      }).then((results) => {
-          if (results.status === 200) {
-            return results.json();
-          } else {
-            this.setState({
-              isError: true
-            })
-            return;
-          }
-        })
-        .then(resultsData => {
-          this.setState({
-            isLoaded: true
-          })
-          if(!resultsData) {
-            return;
-          }
-          if(type === 'project') {
-            this.setState({
-              projectData: resultsData.data
-            })
-          } else {
-            this.setState ({
-              tasks: resultsData.data
-            })
-          }
-        })
+    this.fetchProjectAndTaskData(this.queryPrefix + this.props.match.params.id, 'project');
+    this.fetchProjectAndTaskData(this.queryPrefix + this.props.match.params.id + '/tasks', 'task');
   }
 
   removeTaskFromList(taskId) {
