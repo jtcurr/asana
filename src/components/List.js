@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../css/List.css';
 
 class List extends Component {
 
@@ -12,7 +13,7 @@ class List extends Component {
               <li key={key}>
                 <a href={'https://app.asana.com/0/' + task.id}>{task.id}</a>
                 {' - ' + task.name}
-                <button onClick={() => {context.props.removeTaskFromList(task.id)}}>Hide</button>
+                <button class='submit-button' onClick={() => {context.props.removeTaskFromList(task.id)}}>Hide</button>
               </li>
             )
         })}

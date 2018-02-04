@@ -37,21 +37,23 @@ class ProjectByID extends Component {
   render() {
     if (!this.state.isLoaded) {
       return (
-        <div className="loading-screen">
+        <div className='loading-screen'>
           <span>Loading...</span>
         </div>
       )
     }
     if (this.state.isError) {
       return(
-        <div className="error-screen">
+        <div className='error-screen'>
           <p>I am sorry that token or projectID was incorrect</p>
         </div>
       )
     } else {
         return (
           <div>
-            <span>{this.state.projectData.id + ' - ' + this.state.projectData.name}</span>
+            <div className='list-header-container'>
+              <span>{this.state.projectData.id + ' - ' + this.state.projectData.name}</span>
+            </div>
             <List tasks={this.state.tasks} projectId={this.props.projectData} removeTaskFromList={this.removeTaskFromList.bind(this)} />
           </div>
         )
