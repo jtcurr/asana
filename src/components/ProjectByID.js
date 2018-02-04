@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import authKeys from '../authKeys.js';
 import List from './List';
+
 class ProjectByID extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isLoaded: false,
       projectData: {},
       tasks: [],
       isError: false
@@ -35,6 +37,9 @@ class ProjectByID extends Component {
           }
         })
         .then(resultsData => {
+          this.setState({
+            isLoaded: true
+          })
           if(!resultsData) {
             return;
           }
@@ -47,14 +52,30 @@ class ProjectByID extends Component {
               tasks: resultsData.data
             })
           }
-          console.log('$$$$', this.state.projectData)
-          console.log('%%%%', this.state.tasks)
         })
   }
 
-  render() {
+  removeTaskFromList(taskId, taskList) {
+    let i = taskList.length;
+    while (i--) {
+      if (taskList[i].id === taskId) { 
+        taskList.splice(i, 1);
+      }
+    }
+    this.setState({
+      tasks: taskList
+    })
+  }
 
-    if(this.state.isError) {
+  render() {
+    if (!this.state.isLoaded) {
+      return (
+        <div>
+          <span>Loading...</span>
+        </div>
+      )
+    }
+    if (this.state.isError) {
       return(
         <div>
           <p>I am sorry that token or projectID was incorrect</p>
@@ -63,8 +84,8 @@ class ProjectByID extends Component {
     } else {
         return (
           <div>
-            <span>{this.state.projectData.id}</span>
-            <List tasks={this.state.tasks} />
+            <span>{this.state.projectData.id + ' - ' + this.state.projectData.name}</span>
+            <List tasks={this.state.tasks} projectId={this.props.projectData} removeTaskFromList={this.removeTaskFromList.bind(this)} />
           </div>
         )
     }

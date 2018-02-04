@@ -39,6 +39,7 @@ class Home extends Component {
           <input type="text" value={this.state.id} onChange={this.handleChange} />
           <input type="submit" value="Submit" />
         </form>
+        <span>546061061520110 for example</span>
         {this.state.redirect && (
           <Redirect to={'/projectByID' + this.state.id} component={ProjectByID} params='test'/>
         )}
