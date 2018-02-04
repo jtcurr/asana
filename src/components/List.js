@@ -13,7 +13,7 @@ class List extends Component {
               <li key={key}>
                 <a href={'https://app.asana.com/0/' + task.id}>{task.id}</a>
                 {' - ' + task.name}
-                <button class='submit-button' onClick={() => {context.props.removeTaskFromList(task.id)}}>Hide</button>
+                <button className='submit-button' onClick={() => {context.props.removeTaskFromList(task.id)}}>Hide</button>
               </li>
             )
         })}

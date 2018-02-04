@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect} from 'react-router-dom';
-import ProjectByID from './ProjectByID';
 import logo from '../assets/logo.jpg';
 import '../css/Home.css';
 
@@ -8,8 +6,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: '',
-      redirect: false
+      id: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -22,7 +19,7 @@ class Home extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.setState({ redirect: true })
+    this.props.history.push('/projectID/' + this.state.id)
   }
 
   render() {
@@ -44,9 +41,6 @@ class Home extends Component {
         <div className='welcome-notes'>
         <span>546061061520110 for example</span>
         </div>
-        {this.state.redirect && (
-          <Redirect from='/' to={'/projectByID' + this.state.id} component={ProjectByID} />
-        )}
       </div>
     );
   }

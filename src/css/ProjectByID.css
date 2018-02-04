@@ -1,3 +1,7 @@
+body {
+	background-color: #f5f7f7;
+}
+
 .loading-screen, .error-screen {
 	position:absolute;
 	left:0; right:0;

@@ -17,16 +17,17 @@ class ProjectByID extends Component {
   }
 
   componentDidMount() {
-    this.fetchProjectAndTaskData(this.queryPrefix + this.props.match.params.id, 'project');
-    this.fetchProjectAndTaskData(this.queryPrefix + this.props.match.params.id + '/tasks', 'task');
+    console.log(this.props.match.params.projectID)
+    this.fetchProjectAndTaskData(this.queryPrefix + this.props.match.params.projectID, 'project');
+    this.fetchProjectAndTaskData(this.queryPrefix + this.props.match.params.projectID + '/tasks', 'task');
   }
 
   removeTaskFromList(taskId) {
     let taskList = this.state.tasks
-    let i = taskList.length;
-    while (i--) {
-      if (taskList[i].id === taskId) { 
-        taskList.splice(i, 1);
+    let x = taskList.length;
+    while (x--) {
+      if (taskList[x].id === taskId) { 
+        taskList.splice(x, 1);
       }
     }
     this.setState({
