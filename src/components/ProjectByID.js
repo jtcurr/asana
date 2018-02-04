@@ -55,7 +55,8 @@ class ProjectByID extends Component {
         })
   }
 
-  removeTaskFromList(taskId, taskList) {
+  removeTaskFromList(taskId) {
+    let taskList = this.state.tasks
     let i = taskList.length;
     while (i--) {
       if (taskList[i].id === taskId) { 
